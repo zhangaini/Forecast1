@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:background="@android:color/transparent"
+    android:focusableInTouchMode="true">
+
+
+    <ImageView
+        android:id="@+id/imgLeft"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/menu"
+        android:layout_margin="0dp" />
+
+    <RelativeLayout
+        android:id="@+id/relaMiddle"
+        android:layout_toLeftOf="@+id/imgRight"
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:background="@drawable/shape_white_radio">
+
+        <TextView
+            android:layout_toRightOf="@+id/middle_image"
+            android:id="@+id/seart_title"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search"
+            android:textColor="#FFA5A5A5"
+            android:textSize="12sp"
+            android:layout_marginLeft="14dp"/>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/middle_image"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_sousuo"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/imgRight"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="18dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/message" />
+        <View
+            android:id="@+id/red_tip"
+            android:visibility="gone"
+            android:layout_width="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_height="7dp"
+            android:background="@drawable/shape_cicle_red"/>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_centerVertical="true"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>

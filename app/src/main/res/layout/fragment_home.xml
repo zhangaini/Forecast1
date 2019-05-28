@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_background_color"
+    android:orientation="vertical">
+
+    <com.forecast.forecast.view.widget.NavBar_
+        android:id="@+id/mNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="bottom"
+        android:background="@color/white"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+    </com.forecast.forecast.view.widget.NavBar_>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e9e9e9"/>
+
+
+
+
+    <com.forecast.forecast.view.SportStepCountView
+        android:id="@+id/circleProgress"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="距离"/>
+
+            <TextView
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0公里"
+                android:layout_marginTop="5dp"
+                android:textSize="16dp"
+                android:textColor="#7BE7E7"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="热量"/>
+
+            <TextView
+                android:id="@+id/tv_quarity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="16dp"
+                android:text="0千卡"
+                android:textColor="#7BE7E7"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="步数"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更多》"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp" />
+
+    </RelativeLayout>
+
+    <com.forecast.forecast.view.HistogramView
+        android:id="@+id/histogram"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+
+</LinearLayout>

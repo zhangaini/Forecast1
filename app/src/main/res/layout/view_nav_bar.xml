@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/activityTitleHeight">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+
+        <RelativeLayout
+            android:id="@+id/relaLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/ivMenuLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingRight="6dp"
+                android:paddingLeft="19dp"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/txtLeftView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/ivMenuLeft"
+                android:layout_toRightOf="@+id/ivMenuLeft"
+                android:text=""
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/white"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TextTitle"
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:textIsSelectable="false"
+            tools:text="@string/app_title_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true" />
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/ivMenuRight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="6dp"
+                android:gravity="center"
+                android:layout_toLeftOf="@+id/ivMenuRightTxt"/>
+
+            <TextView
+                android:id="@+id/ivMenuRightTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/imgFirst"
+                android:text=""
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"/>
+
+            <ImageView
+                android:id="@+id/imgFirst"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginRight="6dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="invisible"/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

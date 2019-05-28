@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="color_web_nav_bg">#000000</color><!-- 黑 -->
+    <color name="color_web_nav_title_text">#ffffff</color><!-- 半透明 -->
+
+</resources>

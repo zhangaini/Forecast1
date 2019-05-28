@@ -1,0 +1,42 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="font_normal">13sp</dimen>
+    <dimen name="font_xxxlarge">20sp</dimen>
+    <dimen name="dp_30">30dp</dimen>
+
+    <dimen name="activityTitleHeight">47dp</dimen>
+    <dimen name="header_footer_left_right_padding">24dp</dimen>
+    <dimen name="header_footer_top_bottom_padding">12dp</dimen>
+
+    <!-- 顶部按钮栏高度 -->
+    <dimen name="pickerview_topbar_height">44dp</dimen>
+    <!-- 顶部按钮paddingRight -->
+    <dimen name="pickerview_topbar_paddingright">30dp</dimen>
+    <dimen name="size_15">15dp</dimen>
+    <dimen name="sp_14">14sp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="sp_16">16sp</dimen>
+    <dimen name="sp_12">12sp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+
+
+    <dimen name="psts_dot_wh">4dp</dimen>
+    <dimen name="psts_dot_m_right">9dp</dimen>
+    <dimen name="psts_dot_m_tv_right">8dp</dimen>
+    <dimen name="psts_dot_txt_size">10sp</dimen>
+
+
+    <dimen name="circle_foot_step_title_size">15sp</dimen>
+    <dimen name="circle_foot_step_size">30dp</dimen>
+    <dimen name="day_of_week_control_text_size">15sp</dimen>
+    <dimen name="day_of_work_control_margin_left_right">16.5dp</dimen>
+    <dimen name="day_of_work_control_size">37dp</dimen>
+    <dimen name="current_day_radius">13dp</dimen>
+    <dimen name="distance_and_calorie_layout_margintop">32dp</dimen>
+    <dimen name="pedometer_calorie_distance_margin_left_right">85dp</dimen>
+
+    <dimen name="pedometer_info_margin_top">20dp</dimen>
+    <dimen name="pedometer_info_margin_bottom">30dp</dimen>
+</resources>

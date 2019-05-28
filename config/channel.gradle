@@ -1,0 +1,61 @@
+android {
+    productFlavors {
+//        xiaomi {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "小米"]
+//        }
+        _360 {
+            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "_360"]
+        }
+        baidu {
+            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "百度"]
+        }
+//        wandoujia {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "豌豆荚"]
+//        }
+        yingyongbao {
+            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "应用宝"]
+        }
+//        huawei {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "华为"]
+//        }
+//        sougou {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "搜狗"]
+//        }
+        others {
+            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "通用"]
+        }
+//        meizu {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "魅族"]
+//        }
+//        huodong {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "活动"]
+//        }
+//        oppo {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "oppo"]
+//        }
+//        vivo {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "vivo"]
+//        }
+//        anzhuozhijia {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "安卓之家"]
+//        }
+//        anfenwang {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "安粉网"]
+//        }
+//        anbeimarket {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "安贝市场"]
+//        }
+//        PP {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "PP助手"]
+//        }
+//        Unicom {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "联通"]
+//        }
+//        Telecom {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "电信"]
+//        }
+//        CMCC {
+//            manifestPlaceholders = [TALKINGDATA_CHANNEL_VALUE: "移动"]
+//        }
+    }
+}

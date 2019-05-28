@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_background_color">
+
+
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp"
+        android:background="@color/white">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_header"
+            android:layout_marginTop="13dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:riv_oval="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/timg" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="管理员"
+            android:textColor="@color/black"/>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/line"
+        android:id="@+id/rl_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改密码"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/in_grey"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+    <Button
+        android:id="@+id/bt_exit"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="50dp"
+        android:text="退出登录"
+        android:textSize="17dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_button"/>
+
+
+
+
+</RelativeLayout>

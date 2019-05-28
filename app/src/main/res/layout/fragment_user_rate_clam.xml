@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.forecast.forecast.view.widget.NavBarBack_
+        android:id="@+id/mNavBar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:gravity="bottom"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+    </com.forecast.forecast.view.widget.NavBarBack_>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e9e9e9"/>
+
+
+    <TextView
+        android:id="@+id/tv_rate_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_red"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="心率值"/>
+
+    <TextView
+        android:id="@+id/tv_rate_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_red"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="测试时间"/>
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_red"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="状态"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="静脉心率"
+            android:textSize="16sp"/>
+
+
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更多》"
+            android:layout_alignParentRight="true"
+            android:textSize="16sp"/>
+
+
+    </RelativeLayout>
+
+    <com.forecast.forecast.view.RategramView
+        android:id="@+id/rategram"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

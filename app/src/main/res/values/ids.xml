@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dialog_icon" type="id"/>
+    <item name="dialog_text" type="id"/>
+    <item type="id" name="id_tab_txt">888</item>
+</resources>

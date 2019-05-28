@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:text="dddd"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:textSize="16sp"
+            android:text="dddd"
+            android:layout_centerVertical="true"
+            android:textColor="@color/app_red"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="true"
+            android:background="#e9e9e9"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/bt_modify"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:background="#63a0fb"
+        android:textColor="@color/white"
+        android:layout_gravity="right"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="10dp"
+        android:text="编辑"/>
+
+</LinearLayout>

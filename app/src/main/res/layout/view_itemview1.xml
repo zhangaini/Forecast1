@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="1dp"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/wd_tjr" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:layout_marginStart="17dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_alignTop="@+id/imageView10"
+            android:layout_toRightOf="@+id/imageView10"
+            android:layout_toEndOf="@+id/imageView10" />
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView16"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView16"
+            android:layout_marginEnd="28dp"
+            android:layout_marginRight="28dp"
+            app:srcCompat="@drawable/in" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/imageView11"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:alpha="0.26"
+            android:layout_toRightOf="@+id/imageView10"
+            android:background="@color/color_BDBDBD" />
+
+
+        <ImageView
+            android:id="@+id/imgFirst"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginRight="45dp"
+            android:src="@drawable/shape_cicle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

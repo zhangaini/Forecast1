@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/window_background_color">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="191dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/white">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/iv_header"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            app:riv_oval="true"
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/mine_image_place_holder" />
+
+
+        <TextView
+            android:id="@+id/tv_nick"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/iv_header"
+            android:layout_alignTop="@+id/iv_header"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="管理员"
+            android:textColor="@color/black"/>
+
+
+        <TextView
+            android:id="@+id/tv_login_name"
+            android:layout_toRightOf="@+id/iv_header"
+            android:layout_below="@+id/tv_nick"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:text="您好,yqy"
+            android:textColor="@color/gray"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="250dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="修改密码"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/in_grey"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eee"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_contanct"
+        android:layout_below="@+id/rl_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="紧急联系人"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/in_grey"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+    <Button
+        android:id="@+id/bt_exit"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_height="50dp"
+        android:text="退出登录"
+        android:textSize="17dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_button"/>
+
+
+
+
+</RelativeLayout>

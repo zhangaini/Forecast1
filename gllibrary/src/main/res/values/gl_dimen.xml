@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="gl_web_nav_height">65dp</dimen>
+    <dimen name="gl_web_title_size">18sp</dimen>
+    <dimen name="gl_web_close_size">15sp</dimen>
+    <dimen name="gl_web_nav_padding">12dp</dimen>
+</resources>

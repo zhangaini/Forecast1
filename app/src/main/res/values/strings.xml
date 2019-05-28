@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">预测预警</string>
+    <string name="app_title_name">预测预警</string>
+    <string name="submit_sure">确认</string>
+
+
+    <string name="tab_home">首页</string>
+    <string name="tab_mine">我的</string>
+    <string name="tab_rate">心率</string>
+    <string name="tab_rates">测试</string>
+
+
+    <string name="views_load_more_loading">加载中...</string>
+    <string name="views_load_more_click_to_load_more">点击加载更多</string>
+    <string name="views_load_more_loaded_no_more">没有更多了</string>
+    <string name="views_load_more_error">加载失败,点击重试</string>
+
+    <string name="pull_to_refresh_pull_label">下拉刷新...</string>
+    <string name="pull_to_refresh_release_label">释放刷新...</string>
+    <string name="pull_to_refresh_refreshing_label">正在加载...</string>
+
+    <string name="pull_to_load_more_label">上拉加载...</string>
+    <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
+    <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
+    <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+
+    <string name="pull_to_load_from_bottom_refreshing_label">@string/pull_to_load_more_label</string>
+
+    <string name="pickerview_cancel">取消</string>
+    <string name="pickerview_submit">确定</string>
+    <string name="pickerview_year">年</string>
+    <string name="pickerview_month">月</string>
+    <string name="pickerview_day">日</string>
+    <string name="pickerview_hours">时</string>
+    <string name="pickerview_minutes">分</string>
+
+
+    <string name="progress_loading">请稍候……</string>
+
+
+    <string name="ip_all_images">所有图片</string>
+    <string name="ip_folder_image_count">共%1$d张</string>
+    <string name="ip_preview_image_count">%1$d/%2$d</string>
+    <string name="ip_select_limit">最多选择%1$d张图片</string>
+    <string name="ip_complete">完成</string>
+    <string name="ip_select_complete">完成(%1$d/%2$d)</string>
+    <string name="ip_preview">预览</string>
+    <string name="ip_preview_count">预览(%1$d)</string>
+    <string name="ip_photo_crop">图片裁剪</string>
+    <string name="ip_origin">原图</string>
+    <string name="ip_origin_size">原图(%1$s)</string>
+
+
+</resources>
