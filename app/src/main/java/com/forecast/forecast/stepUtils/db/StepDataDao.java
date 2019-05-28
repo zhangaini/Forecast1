@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fySpring
+ * Created by zlh
+ * 作用:记录下步数的数据存储在本地数据库
  * Date : 2017/3/24
  * To do :
  */

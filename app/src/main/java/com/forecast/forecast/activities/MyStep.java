@@ -26,7 +26,9 @@ import com.forecast.forecast.stepUtils.db.StepDataDao;
 import com.forecast.forecast.stepUtils.service.StepService;
 import com.forecast.forecast.stepUtils.utils.StepCountCheckUtil;
 import com.forecast.forecast.stepUtils.utils.TimeUtil;
+import com.forecast.forecast.utils.Utils;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LimitLine;
@@ -35,8 +37,12 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 
+import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +54,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     private LinearLayout movementCalenderLl;
     private TextView kmTimeTv;
     private TextView totalKmTv;
+    private TextView mKaluli;
     private TextView stepsTimeTv;
     private TextView totalStepsTv;
     private TextView supportTv;
@@ -87,6 +94,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         movementCalenderLl = (LinearLayout) findViewById(R.id.movement_records_calender_ll);
         kmTimeTv = (TextView) findViewById(R.id.movement_total_km_time_tv);
         totalKmTv = (TextView) findViewById(R.id.movement_total_km_tv);
+        mKaluli=(TextView)findViewById(R.id.kaluli);
         stepsTimeTv = (TextView) findViewById(R.id.movement_total_steps_time_tv);
         totalStepsTv = (TextView) findViewById(R.id.movement_total_steps_tv);
         supportTv = (TextView) findViewById(R.id.is_support_tv);
@@ -209,11 +217,14 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
             totalStepsTv.setText(String.valueOf(steps));
             //计算总公里数
             totalKmTv.setText(countTotalKM(steps));
+            //计算卡路里消耗
+            mKaluli.setText((int)(Double.parseDouble(countTotalKM(steps))*117)+"");
         } else {
             //获取全局的步数
             totalStepsTv.setText("0");
             //计算总公里数
             totalKmTv.setText("0");
+            mKaluli.setText("0");
         }
 
         //设置时间
@@ -223,13 +234,13 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     }
 
     /**
-     * 简易计算公里数，假设一步大约有0.7米
+     * 简易计算公里数，假设一步大约有0.6米
      *
      * @param steps 用户当前步数
      * @return
      */
     private String countTotalKM(int steps) {
-        double totalMeters = steps * 0.7;
+        double totalMeters = steps * 0.6;
         //保留两位有效数字
         return df.format(totalMeters / 1000);
     }
@@ -255,17 +266,18 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         initBarChart(barChart);
 
         List<VtDateValueBean> dateValueList = new ArrayList<>();
-        //假数据
-        for (int i = 1; i < 10; i++) {
+        //
+        // TODO: 2019/5/28 0028 将数据库的数据载入 现在是假数据 
+        for (int i = 1; i < 8; i++) {
             VtDateValueBean a=new VtDateValueBean();
             a.setfValue(i+0);
-            a.setsYearMonth(i+"");
+            a.setsYearMonth(i+"a");
             dateValueList.add(a);
 
         }
         //  Collections.reverse(dateValueList);//将集合 逆序排列，转换成需要的顺序
 
-        showBarChart(dateValueList, "步数统计图/km", getResources().getColor(R.color.blue));
+        showBarChart(dateValueList, "步数统计图/km", getResources().getColor(R.color.light_blue));
 
     }
     private void initBarChart(BarChart barChart) {
@@ -290,7 +302,15 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         //X轴设置显示位置在底部
         xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setAxisMinimum(0f);
+
+        //自定义X轴数值
+//        @Override
+//        public String getFormattedValue(float value) {
+//            return super.getFormattedValue(7);
+//        }
+
+
+        xAxis.setAxisMinimum(TimeUtil.getCurrentDay()-6f);
         xAxis.setGranularity(1f);
 
         leftAxis = barChart.getAxisLeft();
@@ -329,13 +349,19 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     }
     public void showBarChart(List<VtDateValueBean> dateValueList, String name, int color) {
         ArrayList<BarEntry> entries = new ArrayList<>();
-        for (int i = 0; i < dateValueList.size(); i++) {
+//        int i = 0; i < dateValueList.size(); i++
+        ArrayList<Integer> sevenDays= new ArrayList<>();
+            for (int i = 0; i < dateValueList.size(); i++) {
             /**
              * 此处还可传入Drawable对象 BarEntry(float x, float y, Drawable icon)
              * 即可设置柱状图顶部的 icon展示
              */
-            BarEntry barEntry = new BarEntry(i, (float) dateValueList.get(i).getfValue());
-            entries.add(barEntry);
+                BarEntry barEntry = new BarEntry(TimeUtil.getCurrentweekDay().get(i), (float) dateValueList.get(i).getfValue());
+                entries.add(barEntry);
+
+
+
+
         }
         // 每一个BarDataSet代表一类柱状图
         BarDataSet barDataSet = new BarDataSet(entries, name);

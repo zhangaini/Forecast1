@@ -141,6 +141,26 @@ public class TimeUtil {
         }
         return weekList;
     }
+    /**by:zlh
+     * 根据当前日期获取以含当天的前一周号数
+     * @return [21日, 22日, 23日, 24日, 25日,26日, 227日]
+     */
+    public static List<Integer> getCurrentweekDay() {
+        List<Integer> weekDayList=new ArrayList<>();
+        for (int i = -6; i <= 0; i++) {
+            //以周日为一周的第一天
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, i);
+            String date = dateFormat.format(calendar.getTime());
+            String dates[]=date.split("月");
+            String dateDay[]=dates[1].split("日");
+            weekDayList.add(Integer.parseInt(dateDay[0]));
+
+        }
+            return weekDayList;
+
+
+    }
 
     /**
      * 判断当前日期是周几
