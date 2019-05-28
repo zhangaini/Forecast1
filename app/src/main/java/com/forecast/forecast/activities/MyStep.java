@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+//zlh 柱状图的界面
 public class MyStep extends AppCompatActivity implements android.os.Handler.Callback {
     private LinearLayout movementCalenderLl;
     private TextView kmTimeTv;
@@ -77,6 +78,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         initView();
         initData();
         initListener();
+        //zlh 获取柱状图 xml有相应的布局
         getBarChart();
     }
 
@@ -253,6 +255,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         initBarChart(barChart);
 
         List<VtDateValueBean> dateValueList = new ArrayList<>();
+        //假数据
         for (int i = 1; i < 10; i++) {
             VtDateValueBean a=new VtDateValueBean();
             a.setfValue(i+0);
