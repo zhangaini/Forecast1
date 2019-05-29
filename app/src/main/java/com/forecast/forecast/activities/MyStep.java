@@ -268,13 +268,26 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         List<VtDateValueBean> dateValueList = new ArrayList<>();
         //
         // TODO: 2019/5/28 0028 将数据库的数据载入 现在是假数据 
-        for (int i = 1; i < 8; i++) {
-            VtDateValueBean a=new VtDateValueBean();
-            a.setfValue(i+0);
-            a.setsYearMonth(i+"a");
-            dateValueList.add(a);
-
-        }
+//        for (int i = 1; i < 8; i++) {
+//            VtDateValueBean a=new VtDateValueBean();
+//            a.setfValue(i+0);
+//            a.setsYearMonth(i+"a");
+//            dateValueList.add(a);
+          // zlh 获取过去一周的日期
+            List<String> MyWeekStep=TimeUtil.getBeforeDateListByNow();
+            //zlh 将过去一周对应的日期的步数取出
+            for (int i=0;i<MyWeekStep.size();i++) {
+                StepEntity stepEntity = stepDataDao.getCurDataByDate(MyWeekStep.get(i));
+                if (stepEntity != null) {
+                    int steps = Integer.parseInt(stepEntity.getSteps());
+                    totalKmTv.setText(countTotalKM(steps));
+                    VtDateValueBean a=new VtDateValueBean();
+                    a.setfValue(Double.valueOf(countTotalKM(steps)));
+                    a.setsYearMonth(i+"a");
+                    dateValueList.add(a);
+                }
+            }
+//        }
         //  Collections.reverse(dateValueList);//将集合 逆序排列，转换成需要的顺序
 
         showBarChart(dateValueList, "步数统计图/km", getResources().getColor(R.color.light_blue));
@@ -351,13 +364,24 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         ArrayList<BarEntry> entries = new ArrayList<>();
 //        int i = 0; i < dateValueList.size(); i++
         ArrayList<Integer> sevenDays= new ArrayList<>();
-            for (int i = 0; i < dateValueList.size(); i++) {
+        int j=0;
+//        for (int i = 0; i < dateValueList.size(); i++) { zlh  原句  我只需要做七天的统计所以
+            for (int i = 0; i <7; i++) {
             /**
              * 此处还可传入Drawable对象 BarEntry(float x, float y, Drawable icon)
              * 即可设置柱状图顶部的 icon展示
              */
-                BarEntry barEntry = new BarEntry(TimeUtil.getCurrentweekDay().get(i), (float) dateValueList.get(i).getfValue());
-                entries.add(barEntry);
+            int temp=7-dateValueList.size() ;
+
+            //如果数据没有七天 那么没数据的都是0
+                if (i>=temp) {
+                    BarEntry barEntry = new BarEntry(TimeUtil.getCurrentweekDay().get(i), (float) dateValueList.get(j).getfValue());
+                    j=j+1;
+                    entries.add(barEntry);
+                } else {
+                    BarEntry barEntry = new BarEntry(TimeUtil.getCurrentweekDay().get(i), 0);
+                    entries.add(barEntry);
+                }
 
 
 
