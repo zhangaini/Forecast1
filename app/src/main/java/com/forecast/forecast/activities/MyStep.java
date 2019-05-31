@@ -39,7 +39,10 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 
 import java.sql.Time;
@@ -58,13 +61,9 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     private TextView stepsTimeTv;
     private TextView totalStepsTv;
     private TextView supportTv;
-    private BarChart barChart;
-    private YAxis leftAxis;             //左侧Y轴
-    private YAxis rightAxis;            //右侧Y轴
-    private XAxis xAxis;                //X轴
-    private Legend legend;              //图例
-    private LimitLine limitLine;        //限制线
-    private List<Integer> listData,listData2;
+
+    private BarChart barchart;
+    ArrayList <String>xAxisValue =new ArrayList<>();
     /**
      * 屏幕长度和宽度
      */
@@ -76,7 +75,6 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     private DecimalFormat df = new DecimalFormat("#.##");
     private List<StepEntity> stepEntityList = new ArrayList<>();
     private StepDataDao stepDataDao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +84,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         initData();
         initListener();
         //zlh 获取柱状图 xml有相应的布局
-        getBarChart();
+        InitBarChart();
     }
 
 
@@ -262,197 +260,13 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     }
 
     private void getBarChart() {
-        barChart= (BarChart) findViewById(R.id.barchart);
-        initBarChart(barChart);
 
-        List<VtDateValueBean> dateValueList = new ArrayList<>();
-        //
-        // TODO: 2019/5/28 0028 将数据库的数据载入 现在是假数据 
-//        for (int i = 1; i < 8; i++) {
-//            VtDateValueBean a=new VtDateValueBean();
-//            a.setfValue(i+0);
-//            a.setsYearMonth(i+"a");
-//            dateValueList.add(a);
-          // zlh 获取过去一周的日期
-            List<String> MyWeekStep=TimeUtil.getBeforeDateListByNow();
-            //zlh 将过去一周对应的日期的步数取出
-            for (int i=0;i<MyWeekStep.size();i++) {
-                StepEntity stepEntity = stepDataDao.getCurDataByDate(MyWeekStep.get(i));
-                if (stepEntity != null) {
-                    int steps = Integer.parseInt(stepEntity.getSteps());
-                    totalKmTv.setText(countTotalKM(steps));
-                    VtDateValueBean a=new VtDateValueBean();
-                    a.setfValue(Double.valueOf(countTotalKM(steps)));
-                    a.setsYearMonth(i+"a");
-                    dateValueList.add(a);
-                }
-            }
-//        }
-        //  Collections.reverse(dateValueList);//将集合 逆序排列，转换成需要的顺序
-
-        showBarChart(dateValueList, "步数统计图/km", getResources().getColor(R.color.light_blue));
-
-    }
-    private void initBarChart(BarChart barChart) {
-        /***图表设置***/
-        //背景颜色
-        barChart.setBackgroundColor(Color.WHITE);
-        //不显示图表网格
-        barChart.setDrawGridBackground(false);
-        //背景阴影
-        barChart.setDrawBarShadow(false);
-        barChart.setHighlightFullBarEnabled(false);
-        //显示边框
-        barChart.setDrawBorders(true);
-        //设置动画效果
-//        barChart.animateY(1000, Easing.Linear);
-//        barChart.animateX(1000, Easing.Linear);
-        //不显示右下角英文
-        Description description = new Description();
-        description.setEnabled(false);
-        barChart.setDescription(description);
-        /***XY轴的设置***/
-        //X轴设置显示位置在底部
-        xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        //自定义X轴数值
-//        @Override
-//        public String getFormattedValue(float value) {
-//            return super.getFormattedValue(7);
-//        }
-
-
-        xAxis.setAxisMinimum(TimeUtil.getCurrentDay()-6f);
-        xAxis.setGranularity(1f);
-
-        leftAxis = barChart.getAxisLeft();
-        rightAxis = barChart.getAxisRight();
-        //保证Y轴从0开始，不然会上移一点
-        leftAxis.setAxisMinimum(0f);
-        rightAxis.setAxisMinimum(0f);
-
-        /***折线图例 标签 设置***/
-        legend = barChart.getLegend();
-        legend.setForm(Legend.LegendForm.LINE);
-        legend.setTextSize(11f);
-        //显示位置
-        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        //是否绘制在图表里面
-        legend.setDrawInside(false);
 
 
     }
-    /**
-     * 柱状图始化设置 一个BarDataSet 代表一列柱状图
-     *
-     * @param barDataSet 柱状图
-     * @param color      柱状图颜色
-     */
-    private void initBarDataSet(BarDataSet barDataSet, int color) {
-        barDataSet.setColor(color);
-        barDataSet.setFormLineWidth(1f);
-        barDataSet.setFormSize(15.f);
-        //不显示柱状图顶部值
-        barDataSet.setDrawValues(false);
-//        barDataSet.setValueTextSize(10f);
-//        barDataSet.setValueTextColor(color);
-    }
-    public void showBarChart(List<VtDateValueBean> dateValueList, String name, int color) {
-        ArrayList<BarEntry> entries = new ArrayList<>();
-//        int i = 0; i < dateValueList.size(); i++
-        ArrayList<Integer> sevenDays= new ArrayList<>();
-        int j=0;
-//        for (int i = 0; i < dateValueList.size(); i++) { zlh  原句  我只需要做七天的统计所以
-            for (int i = 0; i <7; i++) {
-            /**
-             * 此处还可传入Drawable对象 BarEntry(float x, float y, Drawable icon)
-             * 即可设置柱状图顶部的 icon展示
-             */
-            int temp=7-dateValueList.size() ;
-
-            //如果数据没有七天 那么没数据的都是0
-                if (i>=temp) {
-                    BarEntry barEntry = new BarEntry(TimeUtil.getCurrentweekDay().get(i), (float) dateValueList.get(j).getfValue());
-                    j=j+1;
-                    entries.add(barEntry);
-                } else {
-                    BarEntry barEntry = new BarEntry(TimeUtil.getCurrentweekDay().get(i), 0);
-                    entries.add(barEntry);
-                }
 
 
 
-
-        }
-        // 每一个BarDataSet代表一类柱状图
-        BarDataSet barDataSet = new BarDataSet(entries, name);
-        initBarDataSet(barDataSet, color);
-
-//        // 添加多个BarDataSet时
-//        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-//        dataSets.add(barDataSet);
-//        BarData data = new BarData(dataSets);
-
-        BarData data = new BarData(barDataSet);
-        barChart.setData(data);
-    }
-    public static class VtDateValueBean {
-        /**
-         * fValue : -21.7467
-         * sYearMonth : 2018-03
-         */
-
-        private double fValue;
-        private String sYearMonth;
-
-        public double getfValue() {
-            return fValue;
-        }
-
-        public void setfValue(double fValue) {
-            this.fValue = fValue;
-        }
-
-        public String getsYearMonth() {
-            return sYearMonth;
-        }
-
-        public void setsYearMonth(String sYearMonth) {
-            this.sYearMonth = sYearMonth;
-        }
-    }
-
-    /**
-     * 行业平均值
-     */
-    public static class VtDateValueAvgBean {
-        /**
-         * fValue : 7.50136
-         * sYearMonth : 2016-12
-         */
-
-        private double fValue;
-        private String sYearMonth;
-
-        public String getsYearMonth() {
-            return sYearMonth;
-        }
-
-        public void setsYearMonth(String sYearMonth) {
-            this.sYearMonth = sYearMonth;
-        }
-
-        public double getfValue() {
-            return fValue;
-        }
-
-        public void setfValue(double fValue) {
-            this.fValue = fValue;
-        }
-    }
 
 
     @Override
@@ -482,6 +296,80 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         if (isBind) this.unbindService(conn);
     }
 
+    private void InitBarChart() {
+        barchart = (BarChart) findViewById(R.id.barchart);
+        barchart.setDrawBarShadow(false);//true绘画的Bar有阴影。
+        barchart.setDrawValueAboveBar(true);//true文字绘画在bar上
+        barchart.getDescription().setEnabled(false);
+        barchart.setMaxVisibleValueCount(60);
+        barchart.setPinchZoom(false);//false只能单轴缩放
+        barchart.setDrawGridBackground(false);
+        //x坐标轴设置
 
+        xAxisValue.clear();
+        xAxisValue.add("1月");
+        xAxisValue.add("2月");
+        xAxisValue.add("3月");
+        xAxisValue.add("4月");
+        xAxisValue.add("5月");
+        xAxisValue.add("6月");
+        XAxis xAxis = barchart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawLabels(true);
+        xAxis.setAxisMinimum(-0.5f);
+        xAxis.setGranularity(0.5f);//底部X轴值的分割间距
+        xAxis.setLabelCount(xAxisValue.size());
+
+        xAxis.setCenterAxisLabels(false);//设置底部X标签居中
+
+//        XAxis xAxis = barchart.getXAxis();
+//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisValue));
+
+        //设置Y轴
+        barchart.getAxisRight().setEnabled(false);//隐藏右边的坐标轴
+        YAxis leftAxis = barchart.getAxisLeft();
+        leftAxis.setLabelCount(6, false);
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+        leftAxis.setSpaceTop(10f);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(50f);
+
+        Legend l = barchart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setForm(Legend.LegendForm.SQUARE);
+        l.setFormSize(9f);
+        l.setTextSize(11f);
+        l.setXEntrySpace(4f);
+        setData(6, 50);
+    }
+    private void setData(int count, float range) {
+        float start = 0f;
+        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+        for (int i = (int) start; i < start + count; i++) {
+            float mult = (range + 1);
+            float val = (float) (Math.random() * mult);
+            yVals1.add(new BarEntry(i, val));
+        }
+
+        BarDataSet set1 = new BarDataSet(yVals1, "步数统计图/km");
+        set1.setDrawIcons(false);
+        set1.setColor(ColorTemplate.rgb("#44CDC5"));
+        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        dataSets.add(set1);
+        BarData data = new BarData(dataSets);
+        data.setValueTextSize(10f);
+        barchart.setData(data);
+        barchart.getBarData().setBarWidth(0.3f);//设置柱状图的宽度
+        barchart.setScaleXEnabled(false);//禁止X轴缩放
+
+//        barchart.getXAxis().setAxisMinimum(0);
+//        barchart.animateY(1000, Easing.Linear);
+//        barchart.animateX(1000, Easing.Linear);
+    }
 
 }
