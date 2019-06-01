@@ -304,15 +304,28 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         barchart.setMaxVisibleValueCount(60);
         barchart.setPinchZoom(false);//false只能单轴缩放
         barchart.setDrawGridBackground(false);
-        //x坐标轴设置
-
+        //zlh  自定义x坐标轴
+        // TODO: 2019/6/1 0001 emm取出最近一周的日期
         xAxisValue.clear();
-        xAxisValue.add("1月");
-        xAxisValue.add("2月");
-        xAxisValue.add("3月");
-        xAxisValue.add("4月");
-        xAxisValue.add("5月");
-        xAxisValue.add("6月");
+        List<Integer> aWeekDay =TimeUtil.getCurrentweekDay();
+        for (int i=0;i<aWeekDay.size();i++) {
+//            List<String> aWeekDay=  TimeUtil.getBeforeDateListByNow();
+//            //一周日期其中一天
+//            StepEntity stepEntity = stepDataDao.getCurDataByDate(aWeekDay.get(i));
+
+            //将一周的号数填入
+                xAxisValue.add(""+aWeekDay.get(i));
+
+        }
+
+
+//        xAxisValue.add("1月");
+//        xAxisValue.add("2月");
+//        xAxisValue.add("3月");
+//        xAxisValue.add("4月");
+//        xAxisValue.add("5月");
+//        xAxisValue.add("6月");
+
         XAxis xAxis = barchart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -330,7 +343,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         //设置Y轴
         barchart.getAxisRight().setEnabled(false);//隐藏右边的坐标轴
         YAxis leftAxis = barchart.getAxisLeft();
-        leftAxis.setLabelCount(6, false);
+        leftAxis.setLabelCount(7, false);
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(10f);
         leftAxis.setAxisMinimum(0f);
@@ -345,7 +358,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         l.setFormSize(9f);
         l.setTextSize(11f);
         l.setXEntrySpace(4f);
-        setData(6, 50);
+        setData(7, 50);
     }
     private void setData(int count, float range) {
         float start = 0f;
