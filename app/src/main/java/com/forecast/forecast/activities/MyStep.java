@@ -362,7 +362,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         leftAxis.setSpaceTop(10f);
         leftAxis.setAxisMinimum(0f);
         //设置Y轴的最大坐标
-        leftAxis.setAxisMaximum(10f);
+        leftAxis.setAxisMaximum(1f);
 
         Legend l = barchart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
