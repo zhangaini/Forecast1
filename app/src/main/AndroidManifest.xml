@@ -46,9 +46,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.LoginActivity_" />
+
+        <activity
+            android:name=".activities.NewMainActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
         <activity
             android:name=".activities.MainActivity_"
-            android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
