@@ -217,6 +217,7 @@
         android:background="@color/light_blue"
         android:text="统计"
         android:textColor="@color/white"
+        android:id="@+id/statistics"
         />
     </LinearLayout>
 </LinearLayout>

@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -62,7 +63,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     private TextView stepsTimeTv;
     private TextView totalStepsTv;
     private TextView supportTv;
-
+    private Button mButton;
     private BarChart barchart;
     ArrayList <String>xAxisValue =new ArrayList<>();
     /**
@@ -97,7 +98,14 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         stepsTimeTv = (TextView) findViewById(R.id.movement_total_steps_time_tv);
         totalStepsTv = (TextView) findViewById(R.id.movement_total_steps_tv);
         supportTv = (TextView) findViewById(R.id.is_support_tv);
-
+        mButton=(Button)findViewById(R.id.statistics);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent statis= new Intent(MyStep.this,StatisticsActivity.class);
+                MyStep.this.startActivity(statis);
+            }
+        });
         curSelDate = TimeUtil.getCurrentDate();
     }
 
@@ -328,7 +336,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
 //            StepEntity stepEntity = stepDataDao.getCurDataByDate(aWeekDay.get(i));
 
             //将一周的号数填入
-                xAxisValue.add(""+aWeekDay.get(i));
+            xAxisValue.add(""+aWeekDay.get(i));
 
         }
 
@@ -398,8 +406,8 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
             if (stepsTheDay!=null&&stepEntity!=null){
                 int steps = Integer.parseInt(stepEntity.getSteps());
                 DecimalFormat fnum=new DecimalFormat("##0.00");
-                 val= Float.parseFloat((countTotalKM(steps)));
-
+                Double tempNumber=Double.parseDouble((countTotalKM(steps)));
+                val= Float.parseFloat(df.format(tempNumber/ 1000));
 
             }
             else {
