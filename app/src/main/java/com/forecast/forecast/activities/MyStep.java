@@ -15,10 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.forecast.forecast.R;
+import com.forecast.forecast.models.Step;
 import com.forecast.forecast.stepUtils.bean.StepEntity;
 import com.forecast.forecast.stepUtils.calendar.BeforeOrAfterCalendarView;
 import com.forecast.forecast.stepUtils.constant.Constant;
@@ -61,7 +63,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     private TextView stepsTimeTv;
     private TextView totalStepsTv;
     private TextView supportTv;
-
+    private Button mButton;
     private BarChart barchart;
     ArrayList <String>xAxisValue =new ArrayList<>();
     /**
@@ -96,7 +98,14 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         stepsTimeTv = (TextView) findViewById(R.id.movement_total_steps_time_tv);
         totalStepsTv = (TextView) findViewById(R.id.movement_total_steps_tv);
         supportTv = (TextView) findViewById(R.id.is_support_tv);
-
+        mButton=(Button)findViewById(R.id.statistics);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent statis= new Intent(MyStep.this,StatisticsActivity.class);
+                MyStep.this.startActivity(statis);
+            }
+        });
         curSelDate = TimeUtil.getCurrentDate();
     }
 
@@ -206,9 +215,15 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
      *
      */
     private void setDatas() {
-        StepEntity stepEntity = stepDataDao.getCurDataByDate(curSelDate);
-
-        if (stepEntity != null) {
+        String stepsTheDay="非空";
+        StepEntity stepEntity=null;
+        try {
+            stepEntity = stepDataDao.getCurDataByDate(curSelDate);
+        }
+        catch (Exception e){
+            stepsTheDay=null;
+        }
+        if (stepsTheDay!= null&&stepEntity!=null) {
             int steps = Integer.parseInt(stepEntity.getSteps());
 
             //获取全局的步数
@@ -283,6 +298,10 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
                     totalStepsTv.setText(String.valueOf(steps));
                     //计算总公里数
                     totalKmTv.setText(countTotalKM(steps));
+                    //卡路里和柱状图更新
+                    mKaluli.setText((int)(Double.parseDouble(countTotalKM(steps))*117)+"");
+                    // TODO: 2019/6/1 0001  柱状图没法更新 
+                    InitBarChart();
                 }
                 break;
         }
@@ -297,13 +316,16 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
     }
 
     private void InitBarChart() {
+
         barchart = (BarChart) findViewById(R.id.barchart);
+        barchart.clear();
         barchart.setDrawBarShadow(false);//true绘画的Bar有阴影。
         barchart.setDrawValueAboveBar(true);//true文字绘画在bar上
         barchart.getDescription().setEnabled(false);
         barchart.setMaxVisibleValueCount(60);
         barchart.setPinchZoom(false);//false只能单轴缩放
         barchart.setDrawGridBackground(false);
+
         //zlh  自定义x坐标轴
         // TODO: 2019/6/1 0001 emm取出最近一周的日期
         xAxisValue.clear();
@@ -314,7 +336,7 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
 //            StepEntity stepEntity = stepDataDao.getCurDataByDate(aWeekDay.get(i));
 
             //将一周的号数填入
-                xAxisValue.add(""+aWeekDay.get(i));
+            xAxisValue.add(""+aWeekDay.get(i));
 
         }
 
@@ -347,7 +369,8 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(10f);
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(50f);
+        //设置Y轴的最大坐标
+        leftAxis.setAxisMaximum(1f);
 
         Legend l = barchart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
@@ -365,7 +388,31 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
         for (int i = (int) start; i < start + count; i++) {
             float mult = (range + 1);
-            float val = (float) (Math.random() * mult);
+
+            //todo 获取真数据
+            //获取一周的日期
+            List<String> aWeekDay=  TimeUtil.getBeforeDateListByNow();
+            //一周日期其中一天
+            //没东西 会报空指针 换一种写法
+            String stepsTheDay="非空";
+            StepEntity stepEntity=null;
+            try {
+              stepEntity = stepDataDao.getCurDataByDate(aWeekDay.get(i));
+            }
+            catch (Exception e){
+                stepsTheDay=null;
+            }
+            float val=1;
+            if (stepsTheDay!=null&&stepEntity!=null){
+                int steps = Integer.parseInt(stepEntity.getSteps());
+                DecimalFormat fnum=new DecimalFormat("##0.00");
+                Double tempNumber=Double.parseDouble((countTotalKM(steps)));
+                val= Float.parseFloat(df.format(tempNumber/ 1000));
+
+            }
+            else {
+                 val = (float) 0;
+            }
             yVals1.add(new BarEntry(i, val));
         }
 

@@ -25,7 +25,6 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -105,8 +104,8 @@
         <activity android:name=".activities.TeacherDetailActivity_" />
         <activity android:name=".activities.StudentDetailActivity_" />
         <activity android:name=".activities.RegsiterActivity_" />
-        <activity android:name=".activities.AdminMainActivity_"></activity>
-        <activity android:name=".activities.MyStep"/>
+        <activity android:name=".activities.AdminMainActivity_" />
+        <activity android:name=".activities.MyStep" />
 
         <!-- 计步功能 -->
         <service
@@ -114,7 +113,8 @@
             android:priority="1000"
             android:process="com.spring.stepcount.service">
             <intent-filter>
-                <!-- 系统启动完成后会调用-->
+
+                <!-- 系统启动完成后会调用 -->
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.DATE_CHANGED" />
                 <action android:name="android.intent.action.MEDIA_MOUNTED" />
@@ -124,6 +124,8 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
         </service>
+
+        <activity android:name=".activities.StatisticsActivity"></activity>
     </application>
 
 </manifest>
