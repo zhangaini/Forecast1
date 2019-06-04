@@ -1,10 +1,12 @@
 package com.forecast.forecast.activities;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.forecast.forecast.R;
@@ -36,6 +38,7 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
     private TextView mAll_Date;
     private TextView mAll_Steps;
     private TextView mAll_Kaluli;
+    private ImageView mBack;
     ArrayList <String>xAxisValue =new ArrayList<>();
     private DecimalFormat df = new DecimalFormat("#.##");
     private List<StepEntity> stepEntityList = new ArrayList<>();
@@ -46,9 +49,37 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
+        //获取所有的运动步数
+        getRecordList();
         //zlh 获取柱状图 xml有相应的布局
         InitView();
         InitBarChart();
+        InitDate();
+    }
+
+    private void InitDate() {
+        String stepsTheDay="非空";
+        StepEntity stepEntity=null;
+        curSelDate = TimeUtil.getCurrentDate();
+        try {
+            stepEntity = stepDataDao.getCurDataByDate(curSelDate);
+        }
+        catch (Exception e){
+            stepsTheDay=null;
+        }
+        if (stepsTheDay!= null&&stepEntity!=null) {
+            int steps = Integer.parseInt(stepEntity.getSteps());
+
+            //获取全局的步数
+            mAll_Steps.setText(String.valueOf(steps)+"步");
+            //计算总公里数
+            mAll_Km.setText(countTotalKM(steps)+"公里");
+            //计算卡路里消耗
+            mAll_Kaluli.setText((int)(Double.parseDouble(countTotalKM(steps))*117)+"卡路里");
+
+
+        }
+        mAll_Date.setText("今天");
     }
 
     private void InitView() {
@@ -62,13 +93,15 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
         mStatistics_date=(TextView)findViewById(R.id.statistics_date);//顶部日期
         mAll_Km=(TextView)findViewById(R.id.all_km);
         mAll_Date=(TextView)findViewById(R.id.all_Date);
-        mAll_Steps=(TextView)findViewById(R.id.all_km);
+        mAll_Steps=(TextView)findViewById(R.id.all_Steps);
         mAll_Kaluli=(TextView)findViewById(R.id.all_Kaluli);
+        mBack=(ImageView)findViewById(R.id.back);
         mStatistics_date.setOnClickListener(this);
         mAll_Km.setOnClickListener(this);
         mAll_Date.setOnClickListener(this);
         mAll_Steps.setOnClickListener(this);
         mAll_Kaluli.setOnClickListener(this);
+        mBack.setOnClickListener(this);
         mStatistics_date.setText(TimeUtil.getCurrentDate());
         mAll_Date.setText("今天");
     }
@@ -165,7 +198,7 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
                 int steps = Integer.parseInt(stepEntity.getSteps());
                 DecimalFormat fnum=new DecimalFormat("##0.00");
                 Double tempNumber=Double.parseDouble((countTotalKM(steps)));
-                val= Float.parseFloat(df.format(tempNumber/ 1000));
+                val= Float.parseFloat(tempNumber+"");
 
 
 
@@ -210,7 +243,7 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
             Log.i(TAG, "onClick: btnDay");
             //柱状图加载今天的数据 默认选择是今天
             //加载近一个月的数据
-            Log.i(TAG, "onClick: mStatistics_date");
+
             String stepsTheDay="非空";
             StepEntity stepEntity=null;
             curSelDate = TimeUtil.getCurrentDate();
@@ -326,7 +359,22 @@ public class StatisticsActivity extends AppCompatActivity implements View.OnClic
             //消耗卡路里
             Log.i(TAG, "onClick: mAll_Kaluli");
         }
+        else if (v==mBack)
+        {
+            finish();
+        }
 
+
+    }
+    private  void getRecordList() {
+        //获取数据库
+        stepDataDao = new StepDataDao(this);
+        stepEntityList.clear();
+        stepEntityList.addAll(stepDataDao.getAllDatas());
+        if (stepEntityList.size() >= 7) {
+            // TODO: 2017/3/27 在这里获取历史记录条数，当条数达到7条或以上时，就开始删除第七天之前的数据,暂未实现
+
+        }
 
     }
 }

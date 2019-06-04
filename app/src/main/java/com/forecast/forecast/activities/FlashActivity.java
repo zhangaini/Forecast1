@@ -45,11 +45,11 @@ public class FlashActivity extends BaseActivity {
 
             int roleId = SecurePreferences.getInstance().getInt(Constant.TYPE, 0);
             if (roleId ==1){
-                startActivity(new Intent(getActivity(),AdminMainActivity_.class));
+                startActivity(new Intent(getActivity(),NewMainActivity.class));
             }else if(roleId == 0){
                 startActivity(new Intent(getActivity(),LoginActivity_.class));
             }else{
-                startActivity(new Intent(getActivity(),MainActivity_.class));
+                startActivity(new Intent(getActivity(),NewMainActivity.class));
             }
             finish();
 

@@ -290,8 +290,7 @@ public class Heartrate extends View {
         }
         if (mShowNumerical) {
             String progressTxt = String.format("%.0f", (mProgress * 1f) / mMaxProgress
-                    * 100f)
-                    + "%";
+                    * 100f);
             float mTxtWidth = mTextPaint.measureText(progressTxt, 0,
                     progressTxt.length());
             canvas.drawText(progressTxt, mCenterPoint.x - mTxtWidth / 2,

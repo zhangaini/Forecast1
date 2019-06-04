@@ -190,21 +190,21 @@
             android:layout_weight="1"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:text="日"
+            android:background="@drawable/daybtn"
             android:id="@+id/btn_day"
             />
         <Button
             android:layout_weight="1"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:text="周"
+            android:background="@drawable/weekbtn"
             android:id="@+id/btn_week"
             />
         <Button
             android:layout_weight="1"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:text="月"
+            android:background="@drawable/monbtn"
             android:id="@+id/btn_mon"
             />
     </LinearLayout>

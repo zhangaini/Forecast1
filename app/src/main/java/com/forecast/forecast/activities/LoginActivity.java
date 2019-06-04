@@ -85,9 +85,11 @@ public class LoginActivity extends BaseActivity {
 
     public void LoginType(int type ){
         if (type == 1){
-            startActivity(new Intent(getActivity(),MainActivity.class));
+            startActivity(new Intent(getActivity(),NewMainActivity.class));
+            finish();
         }else{
-            startActivity(new Intent(getActivity(),MainActivity.class));
+            startActivity(new Intent(getActivity(),NewMainActivity.class));
+            finish();
         }
     }
 

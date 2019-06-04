@@ -405,9 +405,9 @@ public class MyStep extends AppCompatActivity implements android.os.Handler.Call
             float val=1;
             if (stepsTheDay!=null&&stepEntity!=null){
                 int steps = Integer.parseInt(stepEntity.getSteps());
-                DecimalFormat fnum=new DecimalFormat("##0.00");
+                DecimalFormat fnum=new DecimalFormat("##0");
                 Double tempNumber=Double.parseDouble((countTotalKM(steps)));
-                val= Float.parseFloat(df.format(tempNumber/ 1000));
+                val= Float.parseFloat(tempNumber+"");
 
             }
             else {

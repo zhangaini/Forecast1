@@ -181,6 +181,16 @@ public class TimeUtil {
     }
 
     /**
+     * 返回当前的时间 例如23点 返回23
+     */
+    public static String getCurHour(){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH");//只有时分秒
+//SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//完整的时间
+        String time = sdf.format(date);
+        return time;
+    }
+    /**
      * 判断当前日期是周几
      * @param curDate
      * @return
